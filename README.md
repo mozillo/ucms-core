@@ -1,4 +1,4 @@
-UCMS Core [![Build Status](https://travis-ci.org/facebook/react-native.svg?branch=master)](https://travis-ci.org/facebook/react-native)
+UCMS Core [![Build Status](https://travis-ci.org/ucms/ucms-core.svg?branch=master)](https://travis-ci.org/ucms/ucms-core)
 ===========
 
 基于Koa、React搭建的CMS系统，拥有良好的性能、可插件化、以及对React Native友好的API。
