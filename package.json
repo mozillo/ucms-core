@@ -1,0 +1,27 @@
+{
+  "name": "ucms-core",
+  "version": "0.1.0",
+  "description": "Content Manager System powered by koa, designed for both web and app(react native). Core module.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ucms/ucms-core.git"
+  },
+  "author": "tdzl2003",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ucms/ucms-core/issues"
+  },
+  "homepage": "https://github.com/ucms/ucms-core#readme",
+  "dependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.3.13",
+    "babel-plugin-transform-es2015-destructuring": "^6.3.15",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.3.16",
+    "babel-plugin-transform-es2015-parameters": "^6.3.18",
+    "babel-register": "^6.3.13",
+    "koa": "^2.0.0-alpha.3"
+  }
+}
