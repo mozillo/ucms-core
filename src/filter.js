@@ -16,7 +16,6 @@ export function addFilter(name, filter, priority = 0) {
   });
 }
 
-// If one of them return a true value, the rest will not be invoked.
 export async function applyFilter(name, ...args) {
   const filterList = filterMap[name];
   if (!filterList) {
@@ -39,7 +38,7 @@ export async function applyFilter(name, ...args) {
   let result = null;
   for (let i = 0; i < copy.length; i++) {
     result = copy[i](...args);
-    if (typeof(result) === 'object') {
+    if (typeof(result) === 'object' && typeof(result.then) === 'function') {
       // Wait for async functions.
       result = await result;
     }
@@ -52,11 +51,7 @@ export async function applyFilter(name, ...args) {
   return result;
 }
 
-// Apply all filters of a type, and assume all of them return false value.
-// If one applying is like to call every filter, it assume each filter return false value(i.e. false,0,undefined,null,'').
-// Will throw a error if any of filter returns a true value.
-// Usage: await applyAction(name, ...args);
-export function applyAction(name, ...args) {
+export function doAction(name, ...args) {
   return applyFilter(name, ...args)
     .then(value => {
       if (value) {
