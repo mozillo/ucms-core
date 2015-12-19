@@ -3,3 +3,7 @@
  */
 
 export { startServer } from './src/server';
+export * from './src/filter';
+
+import UCMSError from './src/UCMSError';
+export { UCMSError };

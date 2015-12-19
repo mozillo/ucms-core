@@ -5,6 +5,8 @@ UCMS Core [![Build Status](https://travis-ci.org/ucms/ucms-core.svg?branch=maste
 
 本模块为UCMS的核心模块，具有如下接口：
 
+## API 
+
 ### startServer(options)
 
 启动应用并监听服务器。
@@ -31,3 +33,13 @@ UCMS Core [![Build Status](https://travis-ci.org/ucms/ucms-core.svg?branch=maste
 
 实际上也是调用过滤器，但它假设所有的过滤器函数都返回假值，这意味着所有的过滤器函数都被执行了。
 如果有任何一个过滤器返回了真值，doAction会返回一个被拒绝了的Promise（相当于异步函数抛出了一个异常）。
+
+### class UCMSError(message, status)
+
+通常用于抛出一个带有状态码的错误。message会被作为响应体的message字段发送给客户端，而status会作为HTTP状态码发送给客户端。
+
+## 过滤器
+
+### doAction('init')
+
+在服务器启动之前被调用。

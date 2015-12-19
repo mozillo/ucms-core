@@ -4,6 +4,7 @@
   "description": "Content Manager System powered by koa, designed for both web and app(react native). Core module.",
   "main": "index.js",
   "scripts": {
+    "eslint": "node node_modules/eslint/bin/eslint .",
     "test": "node node_modules/eslint/bin/eslint ."
   },
   "repository": {
