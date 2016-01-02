@@ -6,15 +6,23 @@ import { doAction } from './filter';
 import Koa from 'koa';
 import UCMSError from './UCMSError';
 import Router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
 
-export const INIT = 'ucms-core/init';
-export const INIT_ROUTE = 'ucms-core/initRoute:';
-export const WILL_LISTEN = 'ucms-core/willListen';
-export const DID_LISTEN = 'ucms-core/didListen';
+const INIT = 'server.init';
+const INIT_ROUTE = 'server.initRoute.';
+const WILL_LISTEN = 'server.willListen';
+const DID_LISTEN = 'server.didListen';
+
+export const SERVER = {
+  INIT,
+  INIT_ROUTE,
+  WILL_LISTEN,
+  DID_LISTEN,
+};
 
 export async function startServer(port, host) {
-  await doAction(INIT);
   const app = new Koa();
+  await doAction(INIT, app);
 
   // Translate error into json respnose.
   app.use((ctx, next) => {
@@ -27,6 +35,8 @@ export async function startServer(port, host) {
       });
   });
 
+  app.use(bodyParser());
+
   const router = new Router();
   await doAction(INIT_ROUTE + '/', router);
   app.use(router.routes());
@@ -34,8 +44,8 @@ export async function startServer(port, host) {
   // Treat 404 as Invalid API error.
   app.use(() => Promise.reject(new UCMSError('Invalid API', 404)));
 
-  await doAction(WILL_LISTEN);
+  await doAction(WILL_LISTEN, app);
   app.listen(port, host);
-  await doAction(DID_LISTEN);
+  await doAction(DID_LISTEN, app);
   console.log('Ready.');
 }

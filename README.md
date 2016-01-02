@@ -3,16 +3,16 @@ UCMS Core [![Build Status](https://travis-ci.org/ucms/ucms-core.svg?branch=maste
 
 基于Koa、React搭建的CMS系统，拥有良好的性能、可插件化、以及对React Native友好的API。
 
-本模块为UCMS的核心模块，具有如下接口：
+本模块为UCMS的核心模块。
 
 ## API 
 
-### startServer(options)
+### startServer(port, host)
 
 启动应用并监听服务器。
 
-* options.host 监听服务器的主机名
-* options.port 监听服务器的端口号
+* port 监听服务器的端口号
+* host 监听服务器的主机名
 * 返回一个Promise，包含服务器启动过程中出现的错误，或是成功启动的结果。
 
 ### addFilter(name, filter, priority=0)
@@ -40,6 +40,48 @@ UCMS Core [![Build Status](https://travis-ci.org/ucms/ucms-core.svg?branch=maste
 
 ## 过滤器
 
-### doAction('init')
+### SERVER.INIT: (app)
 
-在服务器启动之前被调用。
+在服务器启动之前被调用。 
+
+- app: Koa App对象。
+
+### SERVER.INIT_ROUTE + '/': (router)
+
+初始化根路由时调用。
+
+- router: Koa-Router对象。
+
+### SERVER.WILL_LISTEN: (app)
+
+开始监听服务器之前调用。
+
+- app: Koa App对象。
+
+### SERVER.DID_LISTEN: (app)
+
+成功监听服务器之后调用。
+
+- app: Koa App对象。
+
+### OBJECTS.GEN_ID: (type)
+
+为指定类型的对象生成一个新的ID。返回一个新的ID。
+
+### OBJECTS.SAVE: (type, id, doc)
+
+尝试直接保存对象。不论对象之前是否已经存在。
+
+### OBJECTS.LOAD: (type, id)
+
+加载一个对象的详细信息。
+
+### OBJECTS.DELETE: (type, id)
+
+删除一个对象。
+
+### OBJECTS.UPDATE: (type, id, updater)
+
+更新一个对象。
+
+- updater: value=>newValue 更新函数，参数是原来的对象，应返回更新后的对象。当出现写冲突的时候，updater可能会被多次调用。

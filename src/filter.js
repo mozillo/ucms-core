@@ -37,7 +37,7 @@ export async function applyFilter(name, ...args) {
   const copy = [...filterList.list];
   let result = null;
   for (let i = 0; i < copy.length; i++) {
-    result = copy[i](...args);
+    result = copy[i].filter(...args);
     if (typeof(result) === 'object' && typeof(result.then) === 'function') {
       // Wait for async functions.
       result = await result;
