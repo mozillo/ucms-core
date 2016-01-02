@@ -23,7 +23,8 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.3.16",
     "babel-plugin-transform-es2015-parameters": "^6.3.18",
     "babel-register": "^6.3.13",
-    "koa": "^2.0.0-alpha.3"
+    "koa": "^2.0.0-alpha.3",
+    "koa-router": "^7.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.6",
