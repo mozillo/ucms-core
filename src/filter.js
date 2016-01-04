@@ -2,6 +2,8 @@
  * Created by tdzl2_000 on 2015-12-18.
  */
 
+import isPromise from 'is-promise';
+
 const filterMap = {};
 
 export function addFilter(name, filter, priority = 0) {
@@ -38,7 +40,7 @@ export async function applyFilter(name, ...args) {
   let result = null;
   for (let i = 0; i < copy.length; i++) {
     result = copy[i].filter(...args);
-    if (typeof(result) === 'object' && typeof(result.then) === 'function') {
+    if (isPromise(result)) {
       // Wait for async functions.
       result = await result;
     }
